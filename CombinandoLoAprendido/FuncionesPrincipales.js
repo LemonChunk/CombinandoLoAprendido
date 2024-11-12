@@ -3,7 +3,7 @@ import { Tarea } from "./Tarea.js";
 import { comprobarTitulo } from "./FuncionesControladoras.js";
 import { mostrarEnPantalla, mostrarIngresoInvalido } from "./FuncionesPantalla.js";
 import * as menu from "./FuncionesMenu.js";
-import { procesoOrdenarTareas, procesoVerTarea } from "./FuncionesGestoras.js";
+import { procesoOrdenarTareas, procesoVerTareaPorEstado, procesoVerTareasPorBusqueda} from "./FuncionesGestoras.js";
 
 /*PROCESO DE AGREGAR TAREA */
 export function opcionPrincipal1(lista){
@@ -58,16 +58,16 @@ export function opcionPrincipal2(lista){
             op=ingreso.ingresarPorTeclado();
             switch(op){
                 case "1":
-                    procesoVerTarea(lista, "Todas");
+                    procesoVerTareaPorEstado(lista, "Todas");
                     break;
                 case "2":
-                    procesoVerTarea(lista, "Pendiente");
+                    procesoVerTareaPorEstado(lista, "Pendiente");
                     break;
                 case "3":
-                    procesoVerTarea(lista, "En curso");
+                    procesoVerTareaPorEstado(lista, "En curso");
                     break;
                 case "4":
-                    procesoVerTarea(lista, "Terminada");
+                    procesoVerTareaPorEstado(lista, "Terminada");
                     break;
                 case "0":
                     mostrarEnPantalla("Volviendo al menú anterior.");
@@ -77,5 +77,17 @@ export function opcionPrincipal2(lista){
                     break;
             }
         }while(op!="0");
+    }
+}
+
+/*PROCESO BUSCAR TAREAS*/
+
+export function opcionPrincipal3(lista){
+    if(lista.esVacia()){
+        mostrarEnPantalla("La lista está vacía.");
+    } else {
+        menu.menuBuscarTarea();
+        let busqueda = ingreso.ingresarPorTeclado();
+        procesoVerTareasPorBusqueda(lista, busqueda);
     }
 }

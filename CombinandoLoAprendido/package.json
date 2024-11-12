@@ -10,6 +10,7 @@
   "description": "",
   "type": "module",
   "dependencies": {
+    "combinandoloaprendido": "file:",
     "prompt-sync": "^4.2.0"
   }
 }

@@ -22,5 +22,12 @@ export class listaTareas{
             return this.#tareas.map((tarea, i) => ({ tarea, indice: i })).map(({ indice }) => indice) ;
         }
     }
+    buscarTarea(busqueda){
+        const tareasFiltradas = this.#tareas
+            .map((tarea, indice) => ({titulo: tarea.getTitulo().toLowerCase(), indice}))
+            .filter(({titulo}) => titulo.includes(busqueda.toLowerCase()))
+            .map(({ indice }) => indice);
+        return tareasFiltradas;
+    }
    
 }

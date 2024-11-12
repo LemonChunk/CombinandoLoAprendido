@@ -14,6 +14,10 @@ export function menuVerMisTareas(){
     mostrarEnPantalla("[4] Terminadas.");
     mostrarEnPantalla("[0] Volver.");
 }
+export function menuBuscarTarea(){
+    mostrarEnPantalla("Introduce el titulo de la tarea a buscar.");
+}
+
 export function menuAgregarUnaTarea(){
     mostrarEnPantalla("Estás creando una nueva tarea.");
     mostrarEnPantalla(`[1] Ingresar título`);
@@ -44,7 +48,7 @@ export function menuVerDetalles(arrayTareas){
 export function menuPreguntarEditarTarea(){
     mostrarEnPantalla("¿Deseas editar la tarea elegida?");
     mostrarEnPantalla("[1] Si");
-    mostrarEnPantalla("[1] No");
+    mostrarEnPantalla("[2] No");
     const eleccion=comprobarOpcionMenuPreguntarEditarTarea();
     switch(eleccion){
         case "1":
