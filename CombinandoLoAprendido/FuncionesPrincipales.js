@@ -1,6 +1,6 @@
 import * as ingreso from "./FuncionesIngreso.js";
 import { Tarea } from "./Tarea.js";
-import { comprobarTitulo } from "./FuncionesControladoras.js";
+import { comprobarTitulo, comprobarOpcionMenuVerTareas } from "./FuncionesControladoras.js";
 import { mostrarEnPantalla, mostrarIngresoInvalido } from "./FuncionesPantalla.js";
 import * as menu from "./FuncionesMenu.js";
 import { procesoOrdenarTareas, procesoVerTareaPorEstado, procesoVerTareasPorBusqueda} from "./FuncionesGestoras.js";
@@ -52,32 +52,24 @@ export function opcionPrincipal2(lista){
         mostrarEnPantalla("La lista está vacía.");
     }
     else{
-        let op;
-        do{
-            menu.menuVerMisTareas();
-            op=ingreso.ingresarPorTeclado();
-            switch(op){
-                case "1":
-                    procesoVerTareaPorEstado(lista, "Todas");
-                    break;
-                case "2":
-                    procesoVerTareaPorEstado(lista, "Pendiente");
-                    break;
-                case "3":
-                    procesoVerTareaPorEstado(lista, "En curso");
-                    break;
-                case "4":
-                    procesoVerTareaPorEstado(lista, "Terminada");
-                    break;
-                case "0":
-                    mostrarEnPantalla("Volviendo al menú anterior.");
-                    break;
-                default:
-                    mostrarIngresoInvalido();
-                    break;
-            }
-        }while(op!="0");
+        gestionarMenuVerTareas(lista);
     }
+}
+
+/*modularizacion de ver tareas, que alguien ponga esto en algun otro archivo, donde sea que vaya xd*/
+export function gestionarMenuVerTareas(lista){
+    menu.menuVerMisTareas();
+    const op = comprobarOpcionMenuVerTareas(ingreso.ingresarPorTeclado());
+    if(op==="Salir"){
+        mostrarEnPantalla("Volviendo al menú anterior.");
+        return;
+    }
+    if(op!==null){
+        procesoVerTareaPorEstado(lista, op);
+    } else {
+        mostrarIngresoInvalido();
+    }
+    return gestionarMenuVerTareas(lista);
 }
 
 /*PROCESO BUSCAR TAREAS*/

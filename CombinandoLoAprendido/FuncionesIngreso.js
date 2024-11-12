@@ -41,9 +41,10 @@ export function ingresarVencimiento(){
 }
 export function ingresarEstado(){
     mostrarEnPantalla("Ingrese un estado a la tarea: \n(P)endiente\n(E)n curso\n(T)erminada\n(C)ancelada");
-    const entrada= ingresarPorTeclado();
-    if(comprobarEstado(entrada)){
+    const estado = comprobarEstado(ingresarPorTeclado());
+    if(estado===null){
+        mostrarIngresoInvalido();
         return ingresarEstado();
     }
-    return entrada;
+    return estado;
 }

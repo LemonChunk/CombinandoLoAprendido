@@ -9,6 +9,21 @@ export function comprobarDificultad(dificultad){
 export function estaIndice(array, index){
     return array.some(indice => indice === index);
 }
+export function comprobarOpcionMenuVerTareas(op){
+    const opciones = {
+        "0": "Salir",
+        "1": "Todas",
+        "2": "Pendiente",
+        "3": "En curso",
+        "4": "Terminada"
+    }
+    if(op in opciones){
+        return opciones[op];
+    } else {
+        return null;
+    }
+}
+
 export function comprobarOpcionMenuVerDetalles(arrayTareas){
     const eleccionUsuario=parseInt(ingresarPorTeclado());
     if(!esNumero(eleccionUsuario)){
@@ -60,8 +75,18 @@ export function esNumero(numero){
     return !isNaN(numero);
 }
 export function comprobarEstado(estado){
-    return (estado.toUpperCase()!=="P" && estado.toUpperCase()!=="E" && 
-    estado.toUpperCase()!=="T" && estado.toUpperCase()!=="C");
+    const estados = {
+        "P" : "Pendiente",
+        "E" : "En curso",
+        "T" : "Terminada",
+        "C" : "Cancelada"
+    }
+
+    if(estado in estados){
+        return estados[estado];
+    } else {
+        return null;
+    }
 }
 export function convertirFormatoDeFecha(fecha){
     //fecha.getDate(): Obtiene el día del mes (número) de la fecha. Por ejemplo, si la fecha es 2024-11-11, 
