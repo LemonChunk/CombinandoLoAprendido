@@ -1,43 +1,52 @@
 import { ingresarPorTeclado } from "./FuncionesIngreso.js";
 import {mostrarIngresoInvalido } from "./FuncionesPantalla.js";
-export function comprobarTitulo(titulo){
+
+/*COMPROBAR TÍTULO*/
+export function comprobarTitulo(titulo){ //Función que comprueba si la tarea tiene título, en caso de no tener devuelve true
     return (titulo=="Sin titulo" || titulo=="");
 }
-export function comprobarDificultad(dificultad){
+
+/*COMPROBAR DIFICULTAD*/
+export function comprobarDificultad(dificultad){ //Función que comprueba que el usuario ingresó una dificultad válida, en caso de no ingresar una dificultad válida retorna true
     return ((isNaN(dificultad)) || (dificultad!=1 && dificultad!=2 && dificultad!=3));
 }
+
+
 export function estaIndice(array, index){
-    return array.some(indice => indice === index);
+    return array.some(indice => indice === index); //Comprueba si existe un índice en el array que sea igual al index
 }
-export function comprobarOpcionMenuVerTareas(op){
-    const opciones = {
+
+/*COMPROBAR OPCIÓN del MENÚ VER TAREAS*/
+export function comprobarOpcionMenuVerTareas(op){ //Función que comprueba si el valor que ingresó el usuario esté dentro de las opciones
+    const opciones = { //Declara el objeto opciones
         "0": "Salir",
         "1": "Todas",
         "2": "Pendiente",
         "3": "En curso",
         "4": "Terminada"
     }
-    if(op in opciones){
-        return opciones[op];
+    if(op in opciones){ //Si el valor de op ingresado por el usuario está dentro de los valores de opciones
+        return opciones[op]; //Retorna la opción ingresada
     } else {
-        return null;
+        return null; //Si no está dentro, retorna NULL
     }
 }
 
-export function comprobarOpcionMenuVerDetalles(arrayTareas){
+/*COMPROBAR OPCIÓN del MENÚ VER DETALLES*/
+export function comprobarOpcionMenuVerDetalles(arrayTareas){ //Función que permite que el usuario ingrese un valor y comprueba que esté dentro de los valores válidos
     const eleccionUsuario=parseInt(ingresarPorTeclado());
-    if(!esNumero(eleccionUsuario)){
-        mostrarIngresoInvalido();
-        return comprobarOpcionMenuVerDetalles();
+    if(!esNumero(eleccionUsuario)){ //Si el dato que ingresó el usuario es diferente a un número
+        mostrarIngresoInvalido(); //Muestra un cartel de error
+        return comprobarOpcionMenuVerDetalles(); //Recursividad
     }
     else{ 
-        if (eleccionUsuario===0) {
+        if (eleccionUsuario===0) { //Si el dato que ingresó el usuario es 0
             return null; //si no tiene ganas de ver los detalles de alguna tarea
         }
-        else{
-            if(!estaIndice(arrayTareas, eleccionUsuario-1)){
-                mostrarIngresoInvalido();
-                return comprobarOpcionMenuVerDetalles();
+        else{ //Si el dato que ingresó el usuario es un número y es diferente de 0
+            if(!estaIndice(arrayTareas, eleccionUsuario-1)){  //Comprueba si el dato del usuario-1 es un índice que esté dentro del array, en caso de que no esté dentro:
+                mostrarIngresoInvalido(); //Muestra un cartel de error
+                return comprobarOpcionMenuVerDetalles(); //Recursividad
             }
             else {
                 return eleccionUsuario; //devuelve el indice de la tarea elegida + 1, ej [2] Buscar materiales, es la tarea con titulo buscar materiales en el indice 1 del arreglo de tareas
@@ -45,23 +54,29 @@ export function comprobarOpcionMenuVerDetalles(arrayTareas){
         }
     }
 }
-export function comprobarOpcionMenuPreguntarEditarTarea(){
+
+/*COMPROBAR OPCIÓN del MENÚ PREGUNTAR EDITAR TAREA*/
+export function comprobarOpcionMenuPreguntarEditarTarea(){ //Función que permite al usuario que ingrese un valor y comprueba que esté dentro de las opciones válidas
     const eleccionUsuario=ingresarPorTeclado();
-    if(eleccionUsuario!="1" && eleccionUsuario!="2"){
-        mostrarIngresoInvalido();
-        return comprobarOpcionMenuPreguntarEditarTarea();
+    if(eleccionUsuario!="1" && eleccionUsuario!="2"){ //Comprueba que el valor que ingresó el usuario sea diferente de 1 o 2, en caso de serlo:
+        mostrarIngresoInvalido(); //Muestra un cartel de error
+        return comprobarOpcionMenuPreguntarEditarTarea(); //Recursividad
     }
-    return eleccionUsuario;
+    return eleccionUsuario; //Si el valor que ingresó el usuario es 1 o 2, lo retorna
 }
-export function comprobarOpcionMenuEditarTarea(){
-    const eleccionUsuario=parseInt(ingresarPorTeclado());
-    if((eleccionUsuario<1 | eleccionUsuario>6) | isNaN(eleccionUsuario)){
-        mostrarIngresoInvalido();
-        return comprobarOpcionMenuEditarTarea();
+
+/*COMPROBAR OPCIÓN del MENU EDITAR TAREA*/
+export function comprobarOpcionMenuEditarTarea(){ //Función que permite al usuario ingresar un valor y comprobar que esté dentro de los valores válidos
+    const eleccionUsuario=parseInt(ingresarPorTeclado()); //Convierte el valor ingresado por el usuario en entero
+    if((eleccionUsuario<1 | eleccionUsuario>6) | isNaN(eleccionUsuario)){ //Comprueba si el valor no está entre 1 y 6 o si el valor no es un número, en caso de que esto sea true:
+        mostrarIngresoInvalido(); //Muestra cartel de error
+        return comprobarOpcionMenuEditarTarea(); //Recursividad
     }
-    return eleccionUsuario;
+    return eleccionUsuario; //Retorna el valor válido
 }
-export function emojizarDificultad(dificultad){
+
+
+export function emojizarDificultad(dificultad){ //Función que devuelve un string con emojis dependiendo de la dificultad de la tarea
     switch(dificultad){
         case 1:
             return "⭐";
@@ -71,23 +86,29 @@ export function emojizarDificultad(dificultad){
             return "⭐⭐⭐";
     }
 }
-export function esNumero(numero){
+
+
+export function esNumero(numero){ //Función que devuelve true si el dato es un número
     return !isNaN(numero);
 }
-export function comprobarEstado(estado){
-    const estados = {
+
+/*COMPROBAR ESTADO*/
+export function comprobarEstado(estado){ //Función que comprueba si el valor que ingresó el usuario está dentro de los valores de estados
+    const estados = { //Declara el objeto estado con sus valores
         "P" : "Pendiente",
         "E" : "En curso",
         "T" : "Terminada",
         "C" : "Cancelada"
     }
 
-    if(estado in estados){
-        return estados[estado];
+    if(estado in estados){ //Si el valor que ingresó el usuario está dentro de estados
+        return estados[estado]; //Devuelve el estado
     } else {
-        return null;
+        return null; //Si ingresó un valor que no está en estados
     }
 }
+
+
 export function convertirFormatoDeFecha(fecha){
     //fecha.getDate(): Obtiene el día del mes (número) de la fecha. Por ejemplo, si la fecha es 2024-11-11, 
     //este método devolvería 11.
@@ -102,9 +123,11 @@ export function convertirFormatoDeFecha(fecha){
     // Si la cadena es más corta que la longitud deseada, rellena con el carácter especificado al inicio.
     return `${dia}/${mes}/${año}`;
 }
-export function comprobarFechaVencimientoParaMostrar(fecha){
-    if(fecha==="Sin fecha de vencimiento"){
+
+/*COMPROBAR FECHA de VENCIMIENTO*/
+export function comprobarFechaVencimientoParaMostrar(fecha){ //Comprueba si la tarea tiene fecha de vencimiento
+    if(fecha==="Sin fecha de vencimiento"){ //En caso de no tener solo devuelve el string para mostrarlo
         return fecha;
     }
-    return convertirFormatoDeFecha(fecha);
+    return convertirFormatoDeFecha(fecha); //Si tiene fecha la convierte en un formato mas legible para mostrarla
 }

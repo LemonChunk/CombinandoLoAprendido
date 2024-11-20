@@ -1,4 +1,5 @@
 export class Tarea{
+    // Se declaran los atributos de Tarea como privados
     #titulo;
     #descripcion;
     #estado;
@@ -6,14 +7,14 @@ export class Tarea{
     #ultimaModificacion;
     #vencimiento;
     #dificultad;
-constructor(
-    titulo="Sin titulo",                     
-    descripcion="Sin descripción",
-    estado="Pendiente",
-    creacion=new Date(),
-    ultimaModificacion=creacion,
-    vencimiento="Sin fecha de vencimiento",
-    dificultad=1
+constructor( //Constructor de la clase Tarea
+    titulo="Sin titulo", //Se le asigna un string predeterminado para el título                     
+    descripcion="Sin descripción", //Se le asigna un string predeterminado para la descripción
+    estado="Pendiente", //Se le asigna un string predeterminado para el estado
+    creacion=new Date(), //Se le asigna la fecha actual para la creación
+    ultimaModificacion=creacion, //Se le asigna la fecha de creación para la fecha de modificación, ya que cuando se crea se modifican atributos
+    vencimiento="Sin fecha de vencimiento", //Se le asigna un string predeterminado para la fecha de vencimiento
+    dificultad=1 //Se le asigna la dificultad más baja de forma predeterminada
 )
 {
     this.#titulo=titulo;
@@ -24,50 +25,51 @@ constructor(
     this.#vencimiento=vencimiento;
     this.#dificultad=dificultad;
 }
-getTitulo() {
+getTitulo() { //Método que devuelve el título de la tarea
     return this.#titulo;
 }
-setTitulo(value) {
+
+setTitulo(value) { //Método que setea (guarda) el título de la tarea
     this.#titulo=value;
 }
 
-getDescripcion() {
+getDescripcion() { //Método que devuelve la descripción de la tarea
     return this.#descripcion;
 }
-setDescripcion(value) {
+setDescripcion(value) { //Método que setea (guarda) la descripción de la tarea
     this.#descripcion = value;
 }
 
-getEstado() {
+getEstado() { //Método que devuelve el estado de la tarea
     return this.#estado;
 }
-setEstado(value) {
+setEstado(value) { //Método que setea (guarda) el estado de la tarea
     this.#estado=value;
 }
 
-getCreacion() {
+getCreacion() { //Método que devuelve la fecha de creación de la tarea
     return this.#creacion;
 }
 // La fecha de creación no debería modificarse, por lo tanto no hay setter para ella.
 
-getUltimaModificacion() {
+getUltimaModificacion() { //Método que devuelve la última modificación de la tarea
     return this.#ultimaModificacion;
 }
-setUltimaModificacion(value) {
+setUltimaModificacion(value) { //Método que setea (guarda) la última modificación de la tarea
     this.#ultimaModificacion = value;
 }
 
-getVencimiento() {
+getVencimiento() { //Método que devuelve la fecha de fecha de vencimiento de la tarea
     return this.#vencimiento;
 }
-setVencimiento(value) {
+setVencimiento(value) { //Método que setea (guarda) la fecha de vencimiento de la tarea
     this.#vencimiento = value;
 }
 
-getDificultad() {
+getDificultad() { //Método que devuelve la dificultad de la tarea
     return this.#dificultad;
 }
-setDificultad(value) {
+setDificultad(value) { //Método que setea (guarda) la dificultad de la tarea
     this.#dificultad=value;
 }
 }
