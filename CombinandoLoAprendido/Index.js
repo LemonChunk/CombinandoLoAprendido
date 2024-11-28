@@ -2,7 +2,7 @@ import { ingresarPorTeclado } from "./FuncionesIngreso.js";
 import { menuPrincipal } from "./FuncionesMenu.js";
 import { opcionPrincipal1, opcionPrincipal2, opcionPrincipal3 } from "./FuncionesPrincipales.js";
 import { listaTareas } from "./ListaTareas.js";
-const lista = new listaTareas(); //Declara xd como una nueva listaTareas(el array de tareas)
+const lista = new listaTareas(); //Declara lista como una nueva listaTareas(el array de tareas)
 let op;
 
 do{
